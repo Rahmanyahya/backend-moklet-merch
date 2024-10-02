@@ -36,7 +36,7 @@ const getAllProductsController = async (req: Request, res: Response) => {
     try {
         const products = await getAllProductsService()
         if (!products) return res.status(500).json({message: "Can't get all products, something went wrong"})
-       return res.status(200).json({message: "Succes get data"})
+       return res.status(200).json({message: "Succes get data", products})
     } catch (error) {
         return res.status(400).json(error)
     }
@@ -49,9 +49,9 @@ const deleteProductController = async (req: Request,res:Response) => {
         const id = Number(req.params.id)
         const isProductExist = await getProductByIdService(id)
         if (!isProductExist) return res.status(404).json({message: "Product not found"})
-        
+        const photo = isProductExist.photo
        const product = await deleteProductService(id)
-       deleteImage(isProductExist.photo, mainImage)
+       deleteImage(photo, mainImage)
        return res.status(200).json({message: "Product Succesfully Deleted"})}
     catch (error) {
         return res.status(400).json(error)

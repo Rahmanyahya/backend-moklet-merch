@@ -51,8 +51,6 @@ const getProductByCategory = async (category: any) => {
     return await prisma.product.findMany({where: {jenis: category}}) ||null
 }
 
-const addPhotoModels = async (fileName: string, dataId: number) => {
-    return await prisma.models.create({data: {photo: fileName, photoModelId: dataId}})
-}
 
-export {addProduct, updateProduct, deleteProduct, getAllProducts, getProductById,getProductByName,getProductByCategory, addPhotoModels}
+
+export {addProduct, updateProduct, deleteProduct, getAllProducts, getProductById,getProductByName,getProductByCategory}

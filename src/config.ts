@@ -1,4 +1,5 @@
 import {product_jenis} from '@prisma/client'
+import { Size } from '@prisma/client';
 import path from 'path'
 
 interface dataProduct {
@@ -11,9 +12,19 @@ interface dataProduct {
     discount?: number;
 }
 
+
+interface transaction {
+    product_id: number;
+    buyer_name: string,
+    photo: string,
+    qty: number,
+    order_price: number,
+    sizes: Size
+}
+
 const root_dir = path.join(__dirname,'../')
 
 const mainImage = "product-images"
-const modelImage = "model"
+const paymentImage = "payment-images"
 
-export {dataProduct,root_dir, mainImage, modelImage}
+export {dataProduct,root_dir, mainImage, paymentImage, transaction}

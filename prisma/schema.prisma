@@ -11,7 +11,6 @@ model admin {
   id        Int      @id @default(autoincrement())
   username  String   @unique
   password  String
-  role      Role
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
@@ -27,16 +26,41 @@ model product {
   discount     Float         @default(0) @db.Double
   createdAt    DateTime?     @default(now())
   updatedAt    DateTime?     @default(now())
-  Models       Models[]
+  transaction  transaction[]
 }
 
-model Models {
-  id           Int       @id @default(autoincrement())
-  Productdata  product   @relation(fields: [photoModelId], references: [id])
-  photoModelId Int
-  photo        String    @default("")
-  createdAt    DateTime? @default(now())
-  updatedAt    DateTime? @default(now())
+model transaction {
+  id             Int      @id @default(autoincrement())
+  product_id     Int
+  buyer_name     String   @default("")
+  phone_number   String   @default("")
+  addres         String   @default("")
+  information    String   @default("")
+  paymentMethode String   @default("")
+  photo          String   @default("")
+  qty            Int      @default(0)
+  order_price    Float    @default(0)
+  size           Size
+  status         statusTransaction @default(process)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+
+  Product product @relation(fields: [product_id], references: [id])
+
+  @@index([product_id], map: "transactio_product_id_fkey")
+}
+
+enum Size {
+  S
+  M
+  L
+  XL
+  XXL
+}
+
+enum statusTransaction {
+  approved
+  process
 }
 
 enum product_jenis {
@@ -51,7 +75,3 @@ enum product_jenis {
 }
 
 
-enum Role {
-  ADMIN
-  USER
-}

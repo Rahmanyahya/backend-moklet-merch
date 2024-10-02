@@ -19,7 +19,6 @@ const loginController = async (req: Request, res: Response) => {
       
       const payload = {
         id: Math.random(),
-        role: checkEmail.role
       }
 
       return res.status(200).json({message: "Successfully login"}), res.cookie("token", jwt.sign(payload, String(process.env.SECRET_KEY), {expiresIn: '24h', algorithm: "ES512"}), {httpOnly: true, secure: true, sameSite: "strict"})
