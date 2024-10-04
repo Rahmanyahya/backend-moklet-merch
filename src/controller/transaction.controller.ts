@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { getProductById } from "../repository/product.repository";
 import { addTransactionService, changeStatusService, deleteTransactionService, getAllTransactionService } from "../service/transaction.service";
 import { paymentImage, transaction } from "../config";
-import { deleteProductService } from "../service/product.service";
 import { deleteImage } from "../utils/errorHandle";
 import { getTransactionById } from "../repository/transaction.repository";
 
